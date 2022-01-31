@@ -12,7 +12,7 @@ function computerPlay() {
 }
 
 // game of rock paper scissors, player vs computer
-function rpc(playerSelection, computerSelection) {
+function rps(playerSelection, computerSelection) {
     // make sure input is all Capitalized, with all lowercase after
     playerSelection = playerSelection[0].toUpperCase() 
     + playerSelection.slice(1).toLowerCase();
@@ -40,7 +40,7 @@ function rpc(playerSelection, computerSelection) {
     return answerLog;
 }
 
-// game of rpc, 5 rounds. final score printed at the end
+// game of rps, 5 rounds. final score printed at the end
 function game() {
     // player, computer score keeper
     let playerScore = 0, computerScore = 0;
@@ -52,7 +52,7 @@ function game() {
 
         // individual game result
         let answerLog = "Game " + i + " result: ";
-        answerLog += rpc(playerSelection, computerPlay());
+        answerLog += rps(playerSelection, computerPlay());
 
         // increment player or computer score based on the result
         if (answerLog.includes("You win")) playerScore++;
