@@ -5,9 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RockPaperScissors</title>
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
 </head>
 <body>
-    
+    <div class="main">
+        <div class="user scoreboard">
+            <p class="name">You</p>
+            <div class="score">0</div>
+        </div>
+        <div class="mid">
+            <h1>Rock Paper Scissors</h1>
+            <h3 class="description">Choose Your Weapon: First to 5 points wins the game</p>
+        </div>
+        <div class="computer scoreboard">
+            <p class="name">Computer</p>
+            <div class="score">0</div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button id="Rock"></button>
+        <button id="Paper"></button>
+        <button id="Scissors"></button>
+    </div>
+    <div class="display">
+        <div class="weapons">
+            <img id="user-choice" src="./img/human-rock.jpg">
+            <img id="computer-choice" src="./img/rock-hand.png">
+        </div>
+        <div class="user-computer">
+            <img id="user-img" src="./img/user.png">
+            <img id="computer-screen" src="./img/computer.png">
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <h2 id="final-result">Game Result</h2>
+            <button id="modal-button">Restart Game?</button>
+        </div>
+    </div>
 </body>
 </html>

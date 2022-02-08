@@ -13,64 +13,93 @@ function computerPlay() {
 
 // game of rock paper scissors, player vs computer
 function rps(playerSelection, computerSelection) {
-    // make sure input is all Capitalized, with all lowercase after
-    playerSelection = playerSelection[0].toUpperCase() 
-    + playerSelection.slice(1).toLowerCase();
 
     // when player and computer tie
-    if (playerSelection == computerSelection) {
-        let tieLog = "Tie! Both gave " + playerSelection;
-        if (playerSelection == "Rock" || playerSelection == "Paper") {
-            tieLog += 's';
-        }
-        return tieLog;
-    }
-    
-    let answerLog = "";
-    
+    if (playerSelection == computerSelection) return "Tie!";
+
     // check first, cases that the player loses. otherwise, player wins
     if ((playerSelection == "Rock" && computerSelection == "Paper") || 
     (playerSelection == "Paper" && computerSelection == "Scissors") ||
     (playerSelection == "Scissors" && computerSelection == "Rock")) {
-        answerLog = "You lose! " + computerSelection + " beats " + playerSelection;
+        return "You lose!";
     } else {
-        answerLog = "You win! " + playerSelection + " beats " + computerSelection;
+        return"You win!";
     }
-
-    return answerLog;
 }
 
-// game of rps, 5 rounds. final score printed at the end
+// game of rps, final score printed at the end
 function game() {
-    // player, computer score keeper
     let playerScore = 0, computerScore = 0;
+    let playerSelection = "", computerSelection = "";
+    let winner = "";
 
-    // loop for 5 games
-    for (let i = 1; i < 6; i++) {
-        // prompt user to give rock, paper or scissors
-        let playerSelection = prompt("Rock, Paper, or Scissors?");
+    // score and description display
+    const userScoreDisplay = document.querySelector(".user .score");
+    const computerScoreDisplay = document.querySelector(".computer .score");
+    const description = document.querySelector(".description");
 
-        // individual game result
-        let answerLog = "Game " + i + " result: ";
-        answerLog += rps(playerSelection, computerPlay());
+    // user and computer choice display
+    const userChoice = document.querySelector("#user-choice");
+    const computerChoice = document.querySelector("#computer-choice");
 
-        // increment player or computer score based on the result
-        if (answerLog.includes("You win")) playerScore++;
-        else if (answerLog.includes("You lose")) computerScore++;
-        
-        // log on console the individual game result
-        console.log(answerLog);
-    }
+    // user clicking a button assigns the selection to the variable playerSelection
+    const btns = document.querySelectorAll("button");
+    btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            playerSelection = btn.id;
+            computerSelection = computerPlay();
 
-    // final game result
-    let finalAnswerLog = "Final result: ";
-    if (playerScore > computerScore) finalAnswerLog += "You win! ";
-    else if (playerScore < computerScore) finalAnswerLog += "You lose! ";
-    else finalAnswerLog += "A tie! ";
+            // change player selection display image
+            if (playerSelection == "Rock") {
+                userChoice.src = "./img/human-rock.jpg";
+            } else if (playerSelection == "Paper") {
+                userChoice.src = "./img/human-paper.jpg";
+            } else {
+                userChoice.src = "./img/human-scissors.jpg";
+            }
 
-    // final game score
-    finalAnswerLog += "Game score of Player: " + playerScore + ", Computer: " + computerScore;
-    console.log(finalAnswerLog);
+            // change computer selection display image
+            if (computerSelection == "Rock") {
+                computerChoice.src = "./img/rock-hand.png";
+            } else if (computerSelection == "Paper") {
+                computerChoice.src = "./img/paper-hand.png";
+            } else {
+                computerChoice.src = "./img/scissors-hand.png";
+            }
+
+            const answerLog = rps(playerSelection, computerSelection);
+
+            // increment player or computer score based on the result
+            if (answerLog.includes("You win")) playerScore++;
+            else if (answerLog.includes("You lose")) computerScore++;
+            
+            // change score display
+            userScoreDisplay.textContent = playerScore;
+            computerScoreDisplay.textContent = computerScore;
+            description.textContent = answerLog;
+
+            if (playerScore == 5) win();
+            
+            if (computerScore == 5) loss();
+        });
+    });
+}
+
+function win() {
+    replay("YOU WIN!");  
+}
+
+function loss() {
+    replay("YOU LOSE!");
+}
+
+
+function replay(finalResult) {
+    const modal = document.querySelector(".modal");
+    modal.style.display = "block";
+    document.querySelector("#final-result").textContent = finalResult;
+    const replayBtn = document.querySelector("#modal-button");
+    replayBtn.addEventListener('click', () => location.reload());
 }
 
 game();
