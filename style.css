@@ -15,6 +15,12 @@ h1 {
     font-size: 48px;
     font-weight: 900;
     font-family: 'Copperplate';
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin-top: 10px;
 }
 
 .main {
@@ -100,7 +106,7 @@ button:hover {
 
 .weapons {
     padding-right: 50px;
-    margin-bottom: -30px;
+    margin-bottom: -110px;
     display: flex;
     justify-content: center;
     gap: 150px;
