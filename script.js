@@ -78,21 +78,12 @@ function game() {
             computerScoreDisplay.textContent = computerScore;
             description.textContent = answerLog;
 
-            if (playerScore == 5) win();
+            if (playerScore == 5) replay("YOU WIN!");
             
-            if (computerScore == 5) loss();
+            if (computerScore == 5) replay("YOU LOSE!");
         });
     });
 }
-
-function win() {
-    replay("YOU WIN!");  
-}
-
-function loss() {
-    replay("YOU LOSE!");
-}
-
 
 function replay(finalResult) {
     const modal = document.querySelector(".modal");
